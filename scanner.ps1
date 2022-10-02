@@ -1,11 +1,13 @@
 $target = "mail.local"
 $checkdns = Resolve-DnsName $target -ErrorAction SilentlyContinue
+$webtest1 = "0"
+$webtest2 = "0"
 
 if($checkdns){
 Write-host "Running autodiscover test..." -ForegroundColor Cyan
 try
 {
-$webtest1 = Invoke-WebRequest -uri "https://$target/autodiscover"
+$webtest1 = Invoke-WebRequest -uri "https://$target/autodiscover" -Verbose
 }
 catch
 {
@@ -20,7 +22,7 @@ Write-host "Running autodiscover SSRF test..." -ForegroundColor Cyan
 try
 {
 write-host "testing site..." -ForegroundColor Gray
-$webtest2 = invoke-webrequest -uri "https://$target/autodiscover/autodiscover.json?scanner4329@pwnstar.local/owa/&Email=autodiscover/autodiscover.json?b@small.local&Protocol=HACKER&Protocol=Powershell"
+$webtest3 = invoke-webrequest -uri "https://$target/autodiscover/autodiscover.json?scanner4329@pwnstar.local/owa/&Email=autodiscover/autodiscover.json?b@small.local&Protocol=HACKER&Protocol=PowerShell" -Verbose
 }
 catch
 {
@@ -50,3 +52,6 @@ else
 {
 write-host "DNS does not resolve" -ForegroundColor Red
 }
+
+if(Get-Variable webtest1){Clear-Variable webtest1}
+if(Get-Variable webtest2){Clear-Variable webtest2}
