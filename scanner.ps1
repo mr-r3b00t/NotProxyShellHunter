@@ -22,7 +22,7 @@ Write-host "Running autodiscover SSRF test..." -ForegroundColor Cyan
 try
 {
 write-host "testing site..." -ForegroundColor Gray
-$webtest3 = invoke-webrequest -uri "https://$target/autodiscover/autodiscover.json?scanner4329@pwnstar.local/owa/&Email=autodiscover/autodiscover.json?b@small.local&Protocol=HACKER&Protocol=PowerShell" -Verbose
+$webtest2 = invoke-webrequest -uri "https://$target/autodiscover/autodiscover.json?scanner4329@pwnstar.local/owa/&Email=autodiscover/autodiscover.json?b@small.local&Protocol=HACKER&Protocol=PowerShell" -Verbose
 }
 catch
 {
@@ -52,5 +52,6 @@ else
 {
 write-host "DNS does not resolve" -ForegroundColor Red
 }
+
 if(Get-Variable webtest1 -ErrorAction SilentlyContinue){Clear-Variable webtest1}
 if(Get-Variable webtest2 -ErrorAction SilentlyContinue){Clear-Variable webtest2}
