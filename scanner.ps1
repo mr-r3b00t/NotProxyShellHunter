@@ -52,6 +52,5 @@ else
 {
 write-host "DNS does not resolve" -ForegroundColor Red
 }
-
-if(Get-Variable webtest1){Clear-Variable webtest1}
-if(Get-Variable webtest2){Clear-Variable webtest2}
+if(Get-Variable webtest1 -ErrorAction SilentlyContinue){Clear-Variable webtest1}
+if(Get-Variable webtest2 -ErrorAction SilentlyContinue){Clear-Variable webtest2}
