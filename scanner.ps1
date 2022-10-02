@@ -39,7 +39,7 @@ catch
     if($webtest2.StatusCode -eq 200)
     {
     write-host "Connected to Server with HTTP 200 Response..." -ForegroundColor Green
-    if($webtest2.Headers.Keys -contains "X-FEServer")
+    if($webtest2.RawContent.ToString() -like "*Powershell*")
             {
             write-host "Poentially vulnerable to CVE-2022-40140 & CVE-2022-41082" -ForegroundColor Red
             }
