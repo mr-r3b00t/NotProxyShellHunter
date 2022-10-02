@@ -7,7 +7,7 @@ if($checkdns){
 Write-host "Running autodiscover test..." -ForegroundColor Cyan
 try
 {
-$webtest1 = Invoke-WebRequest -uri "https://$target/autodiscover" -Verbose
+$webtest1 = Invoke-WebRequest -uri "https://$target/autodiscover" -Verbose -DisableKeepAlive
 }
 catch
 {
@@ -16,17 +16,17 @@ $Failure = $_.Exception.Response
 $Failure.Headers.tostring()
 }
 
-
-
 Write-host "Running autodiscover SSRF test..." -ForegroundColor Cyan
 try
 {
 write-host "testing site..." -ForegroundColor Gray
-$webtest2 = invoke-webrequest -uri "https://$target/autodiscover/autodiscover.json?scanner4329@pwnstar.local/owa/&Email=autodiscover/autodiscover.json?b@small.local&Protocol=HACKER&Protocol=PowerShell" -Verbose
+$webtest2 = invoke-webrequest -uri "https://$target/autodiscover/autodiscover.json?scanner4329@pwnstar.local/owa/&Email=autodiscover/autodiscover.json?b@small.local&Protocol=HACKER&Protocol=PowerShell" -Verbose -DisableKeepAlive
 }
 catch
 {
     write-host "Caught" -ForegroundColor Red
+    $failure.StatusCode
+    if($failure.StatusCode -contains "BadGateway"){write-host "Mitigation Detected" -ForegroundColor Green}
     $Failure = $_.Exception.Response
     $Failure.Headers.tostring()
     $Failure.Headers.tostring() | findstr /I "X-OWA-Version"
